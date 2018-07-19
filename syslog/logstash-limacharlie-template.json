@@ -1,0 +1,95 @@
+{  
+  "index_patterns": ["logstash-limacharlie*"],
+  "version":50001,
+  "order" : 1,
+  "settings":{  
+    "number_of_replicas":0,
+    "number_of_shards":1,
+    "index.refresh_interval":"30s"
+  },
+  "mappings":{  
+    "doc":{  
+       "dynamic": false,
+       "date_detection": false,
+       "properties":{  
+        "@timestamp":{  
+          "type":"date"
+        },
+        "@version":{  
+          "type":"keyword"
+        },
+        "geoip":{  
+          "dynamic":true,
+          "properties":{  
+            "ip":{  
+              "type":"ip"
+            },
+            "location":{  
+              "type":"geo_point"
+            },
+            "latitude":{  
+              "type":"half_float"
+            },
+            "longitude":{  
+              "type":"half_float"
+            }
+          }
+        },
+        "destination_geo":{  
+          "dynamic":true,
+          "properties":{  
+            "ip":{  
+              "type":"ip"
+            },
+            "location":{  
+              "type":"geo_point"
+            },
+            "latitude":{  
+              "type":"half_float"
+            },
+            "longitude":{  
+              "type":"half_float"
+            }
+          }
+        },
+        "source_geo":{  
+          "dynamic":true,
+          "properties":{  
+            "ip":{  
+              "type":"ip"
+            },
+            "location":{  
+              "type":"geo_point"
+            },
+            "latitude":{  
+              "type":"half_float"
+            },
+            "longitude":{  
+              "type":"half_float"
+            }
+          }
+        },
+	"detect":{
+          "type":"object",
+          "dynamic": true
+        },
+	"detect_id":{
+          "type":"text",
+          "fields":{
+            "keyword":{
+              "type":"keyword"
+            }
+          }
+	},
+        "event":{
+          "type":"object",
+          "dynamic": true
+        },
+        "routing":{
+          "type":"object",
+          "dynamic": true
+        }
+      }
+    }
+  }
+}
